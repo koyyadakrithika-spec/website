@@ -1,55 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Add Blog</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Blog</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<nav>
-    <a href="index.html">Home</a> |
-    <a href="add-blog.html">Add Blog</a>
-</nav>
-
-<hr>
+<header>
 
 <h1>Add New Blog</h1>
 
-<form>
+</header>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="add-blog.html">Add Blog</a>
+
+</nav>
+
+<form id="blogForm">
 
 <label>Blog Title</label>
 
-<br><br>
-
-<input type="text">
-
-<br><br>
+<input
+type="text"
+id="title"
+placeholder="Enter Blog Title"
+>
 
 <label>Author Name</label>
 
-<br><br>
-
-<input type="text">
-
-<br><br>
+<input
+type="text"
+id="author"
+placeholder="Enter Author Name"
+>
 
 <label>Blog Content</label>
 
-<br><br>
+<textarea
+id="content"
+rows="6"
+placeholder="Write Blog Here"
+></textarea>
 
-<textarea rows="6" cols="40"></textarea>
+<button type="submit">
 
-<br><br>
+Submit Blog
 
-<button>Submit</button>
+</button>
 
 </form>
 
-<hr>
-
 <footer>
+
 <p>© 2026 My Blog Website</p>
+
 </footer>
 
+<script src="script.js"></script>
+
 </body>
+
 </html>

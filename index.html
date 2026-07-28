@@ -1,38 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Blog Website</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Blog Website</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
+<header>
+
+<h1>My Blog Website</h1>
+
+</header>
+
 <nav>
-    <a href="index.html">Home</a> |
-    <a href="add-blog.html">Add Blog</a>
+
+<a href="index.html">Home</a>
+
+<a href="add-blog.html">Add Blog</a>
+
 </nav>
 
-<hr>
-
-<h1>Welcome to My Blog</h1>
-
-<p>
-This is the homepage of my blog website.
-Here you can read different blogs.
-</p>
+<div class="container">
 
 <h2>Latest Blogs</h2>
 
-<ul>
-    <li>Technology</li>
-    <li>Travel</li>
-    <li>Education</li>
-</ul>
+<div id="blogContainer"></div>
 
-<hr>
+</div>
 
 <footer>
-    <p>© 2026 My Blog Website</p>
+
+<p>© 2026 My Blog Website</p>
+
 </footer>
 
+<script>
+
+async function loadBlogs(){
+
+const response = await fetch("/blogs");
+
+const blogs = await response.json();
+
+const container = document.getElementById("blogContainer");
+
+container.innerHTML = "";
+
+if(blogs.length===0){
+
+container.innerHTML="<p>No blogs available.</p>";
+
+return;
+
+}
+
+blogs.forEach(blog=>{
+
+container.innerHTML += `
+
+<div class="card">
+
+<h3>${blog.title}</h3>
+
+<p><strong>Author:</strong> ${blog.author}</p>
+
+<p>${blog.content}</p>
+
+</div>
+
+`;
+
+});
+
+}
+
+loadBlogs();
+
+</script>
+
 </body>
+
 </html>

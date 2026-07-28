@@ -1,0 +1,24 @@
+{
+  "name": "blogwebsite",
+  "version": "1.0.0",
+  "description": "Blog Website using Express",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koyyadakrithika-spec/website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/koyyadakrithika-spec/website/issues"
+  },
+  "homepage": "https://github.com/koyyadakrithika-spec/website#readme"
+}
