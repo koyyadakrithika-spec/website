@@ -1,92 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog Website</title>
 
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Blog Website</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
+    <!-- Header -->
+    <header>
+        <h1>My Blog Website</h1>
+    </header>
 
-<h1>My Blog Website</h1>
+    <!-- Navigation -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="add-blog.html">Add Blog</a>
+    </nav>
 
-</header>
+    <!-- Main Content -->
+    <div class="container">
 
-<nav>
+        <h2>All Blog Posts</h2>
 
-<a href="index.html">Home</a>
+        <!-- Blogs will appear here -->
+        <div id="blogList">
 
-<a href="add-blog.html">Add Blog</a>
+        </div>
 
-</nav>
+    </div>
 
-<div class="container">
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 My Blog Website. All Rights Reserved.</p>
+    </footer>
 
-<h2>Latest Blogs</h2>
-
-<div id="blogContainer"></div>
-
-</div>
-
-<footer>
-
-<p>© 2026 My Blog Website</p>
-
-</footer>
-
-<script>
-
-async function loadBlogs(){
-
-const response = await fetch("/blogs");
-
-const blogs = await response.json();
-
-const container = document.getElementById("blogContainer");
-
-container.innerHTML = "";
-
-if(blogs.length===0){
-
-container.innerHTML="<p>No blogs available.</p>";
-
-return;
-
-}
-
-blogs.forEach(blog=>{
-
-container.innerHTML += `
-
-<div class="card">
-
-<h3>${blog.title}</h3>
-
-<p><strong>Author:</strong> ${blog.author}</p>
-
-<p>${blog.content}</p>
-
-</div>
-
-`;
-
-});
-
-}
-
-loadBlogs();
-
-</script>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 
 </body>
-
 </html>

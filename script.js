@@ -1,49 +1,89 @@
-document
-.getElementById("blogForm")
-.addEventListener("submit", async function(event){
+// -----------------------------
+// Add Blog Form
+// -----------------------------
 
-event.preventDefault();
+const blogForm = document.getElementById("blogForm");
 
-const title=document.getElementById("title").value.trim();
+if (blogForm) {
 
-const author=document.getElementById("author").value.trim();
+    blogForm.addEventListener("submit", async function (event) {
 
-const content=document.getElementById("content").value.trim();
+        event.preventDefault();
 
-if(title===""||author===""||content===""){
+        const title = document.getElementById("title").value.trim();
+        const author = document.getElementById("author").value.trim();
+        const content = document.getElementById("content").value.trim();
 
-alert("Please fill all fields");
+        // Form Validation
+        if (title === "" || author === "" || content === "") {
+            alert("Please fill all the fields.");
+            return;
+        }
 
-return;
+        // Send data to Express server
+        const response = await fetch("/add-blog", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                title: title,
+                author: author,
+                content: content
+            })
+
+        });
+
+        const result = await response.json();
+
+        alert(result.message);
+
+        // Clear the form
+        blogForm.reset();
+
+    });
 
 }
 
-const response=await fetch("/add-blog",{
+// -----------------------------
+// Display Blogs on Home Page
+// -----------------------------
 
-method:"POST",
+const blogList = document.getElementById("blogList");
 
-headers:{
+if (blogList) {
 
-"Content-Type":"application/json"
+    loadBlogs();
 
-},
+}
 
-body:JSON.stringify({
+async function loadBlogs() {
 
-title,
+    const response = await fetch("/blogs");
 
-author,
+    const blogs = await response.json();
 
-content
+    blogList.innerHTML = "";
 
-})
+    blogs.forEach(blog => {
 
-});
+        blogList.innerHTML += `
 
-const data=await response.json();
+        <div class="card">
 
-alert(data.message);
+            <h2>${blog.title}</h2>
 
-document.getElementById("blogForm").reset();
+            <h4>Author: ${blog.author}</h4>
 
-});
+            <p>${blog.content}</p>
+
+        </div>
+
+        `;
+
+    });
+
+}

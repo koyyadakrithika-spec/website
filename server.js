@@ -1,31 +1,35 @@
 const express = require("express");
 
 const app = express();
+
 const PORT = 3000;
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Serve Static Files
 app.use(express.static(__dirname));
 
-// JavaScript Array to Store Blogs
+// Store blogs in a JavaScript array
 let blogs = [];
 
-// GET API - Get All Blogs
+// Home Page
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/index.html");
+});
+
+// Get all blogs
 app.get("/blogs", (req, res) => {
     res.json(blogs);
 });
 
-// POST API - Add Blog
+// Add new blog
 app.post("/add-blog", (req, res) => {
 
     const { title, author, content } = req.body;
 
+    // Validation
     if (!title || !author || !content) {
         return res.status(400).json({
-            message: "All fields are required!"
+            message: "Please fill all fields."
         });
     }
 
@@ -47,5 +51,5 @@ app.post("/add-blog", (req, res) => {
 
 // Start Server
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

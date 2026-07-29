@@ -1,76 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Blog</title>
 
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Add Blog</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
+    <!-- Header -->
+    <header>
+        <h1>Add New Blog</h1>
+    </header>
 
-<h1>Add New Blog</h1>
+    <!-- Navigation -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="add-blog.html">Add Blog</a>
+    </nav>
 
-</header>
+    <!-- Add Blog Form -->
+    <div class="container">
 
-<nav>
+        <form id="blogForm">
 
-<a href="index.html">Home</a>
+            <label for="title">Blog Title</label>
+            <input
+                type="text"
+                id="title"
+                placeholder="Enter Blog Title"
+                required
+            >
 
-<a href="add-blog.html">Add Blog</a>
+            <label for="author">Author Name</label>
+            <input
+                type="text"
+                id="author"
+                placeholder="Enter Author Name"
+                required
+            >
 
-</nav>
+            <label for="content">Blog Content</label>
+            <textarea
+                id="content"
+                rows="6"
+                placeholder="Write your blog here..."
+                required
+            ></textarea>
 
-<form id="blogForm">
+            <button type="submit">Add Blog</button>
 
-<label>Blog Title</label>
+        </form>
 
-<input
-type="text"
-id="title"
-placeholder="Enter Blog Title"
->
+    </div>
 
-<label>Author Name</label>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 My Blog Website. All Rights Reserved.</p>
+    </footer>
 
-<input
-type="text"
-id="author"
-placeholder="Enter Author Name"
->
-
-<label>Blog Content</label>
-
-<textarea
-id="content"
-rows="6"
-placeholder="Write Blog Here"
-></textarea>
-
-<button type="submit">
-
-Submit Blog
-
-</button>
-
-</form>
-
-<footer>
-
-<p>© 2026 My Blog Website</p>
-
-</footer>
-
-<script src="script.js"></script>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 
 </body>
-
 </html>
