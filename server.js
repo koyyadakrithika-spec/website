@@ -1,50 +1,64 @@
 const express = require("express");
 
 const app = express();
-
 const PORT = 3000;
 
 // Middleware
 app.use(express.json());
-app.use(express.static(__dirname));
+app.use(express.urlencoded({ extended: true }));
 
-// Store blogs in a JavaScript array
+// Store blogs in an array
 let blogs = [];
 
-// Home Page
+// Home Route
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html");
+    res.send("Welcome to My Blog Website!");
 });
 
-// Get all blogs
+// Get All Blogs
 app.get("/blogs", (req, res) => {
     res.json(blogs);
 });
 
-// Add new blog
+// Add Blog
 app.post("/add-blog", (req, res) => {
 
-    const { title, author, content } = req.body;
-
-    // Validation
-    if (!title || !author || !content) {
-        return res.status(400).json({
-            message: "Please fill all fields."
-        });
-    }
-
     const newBlog = {
-        id: blogs.length + 1,
-        title,
-        author,
-        content
+        title: req.body.title,
+        author: req.body.author,
+        content: req.body.content
     };
 
     blogs.push(newBlog);
 
-    res.status(201).json({
+    res.json({
         message: "Blog Added Successfully!",
-        blog: newBlog
+        blogs: blogs
+    });
+
+});
+
+// Edit Blog
+app.put("/edit-blog/:id", (req, res) => {
+
+    const id = req.params.id;
+
+    // Check if blog exists
+    if (id >= blogs.length || id < 0) {
+        return res.status(404).json({
+            message: "Blog not found"
+        });
+    }
+
+    blogs[id] = {
+        title: req.body.title,
+        author: req.body.author,
+        content: req.body.content
+    };
+
+    res.json({
+        message: "Blog Updated Successfully!",
+        blogs: blogs
     });
 
 });
