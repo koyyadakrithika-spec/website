@@ -7,7 +7,7 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Store blogs in an array
+// Store blogs in a JavaScript array
 let blogs = [];
 
 // Home Route
@@ -15,12 +15,12 @@ app.get("/", (req, res) => {
     res.send("Welcome to My Blog Website!");
 });
 
-// Get All Blogs
+// GET - View All Blogs
 app.get("/blogs", (req, res) => {
     res.json(blogs);
 });
 
-// Add Blog
+// POST - Add Blog
 app.post("/add-blog", (req, res) => {
 
     const newBlog = {
@@ -31,20 +31,19 @@ app.post("/add-blog", (req, res) => {
 
     blogs.push(newBlog);
 
-    res.json({
+    res.status(201).json({
         message: "Blog Added Successfully!",
         blogs: blogs
     });
 
 });
 
-// Edit Blog
+// PUT - Edit Blog
 app.put("/edit-blog/:id", (req, res) => {
 
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
 
-    // Check if blog exists
-    if (id >= blogs.length || id < 0) {
+    if (isNaN(id) || id < 0 || id >= blogs.length) {
         return res.status(404).json({
             message: "Blog not found"
         });
@@ -58,6 +57,26 @@ app.put("/edit-blog/:id", (req, res) => {
 
     res.json({
         message: "Blog Updated Successfully!",
+        blogs: blogs
+    });
+
+});
+
+// DELETE - Delete Blog
+app.delete("/delete-blog/:id", (req, res) => {
+
+    const id = parseInt(req.params.id);
+
+    if (isNaN(id) || id < 0 || id >= blogs.length) {
+        return res.status(404).json({
+            message: "Blog not found"
+        });
+    }
+
+    blogs.splice(id, 1);
+
+    res.json({
+        message: "Blog Deleted Successfully!",
         blogs: blogs
     });
 
