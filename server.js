@@ -6,14 +6,11 @@ const PORT = 3000;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+//add blog
+app.use(express.static("public"));
 
 // Store blogs in a JavaScript array
 let blogs = [];
-
-// Home Route
-app.get("/", (req, res) => {
-    res.send("Welcome to My Blog Website!");
-});
 
 // GET - View All Blogs
 app.get("/blogs", (req, res) => {
